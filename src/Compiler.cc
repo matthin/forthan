@@ -9,27 +9,9 @@ Compiler::Compiler(const std::string& instructions) {
 
   std::string line;
   while(std::getline(stream, line, ' ')) {
-    if (line.at(0) == '*') {
-      stack.push(
-        stackPopTop() * stackPopTop()
-      );
-    } else if (line.at(0) == '/') {
-      const auto second = stackPopTop();
-      const auto first = stackPopTop();
-      stack.push(
-        first / second
-      );
-    } else if (line.at(0) == '+') {
-      stack.push(
-        stackPopTop() + stackPopTop()
-      );
-    } else if (line.at(0) == '-') {
-      const auto second = stackPopTop();
-      const auto first = stackPopTop();
-      stack.push(
-        first - second
-      );
-    } else {
+    try {
+      dictionary.at(line)();
+    } catch (const std::out_of_range& error) {
       stack.push(std::stoi(line));
     }
   }
