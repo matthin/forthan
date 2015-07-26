@@ -1,0 +1,8 @@
+build/
+doc/
+
+*.pyc
+
+# Vim
+*.swp
+

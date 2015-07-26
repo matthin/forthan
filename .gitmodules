@@ -1,0 +1,3 @@
+[submodule "opt/catch"]
+	path = opt/catch
+	url = https://github.com/philsquared/Catch.git
