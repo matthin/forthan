@@ -13,6 +13,22 @@ Compiler::Compiler(const std::string& instructions) {
       stack.push(
         stackPopTop() * stackPopTop()
       );
+    } else if (line.at(0) == '/') {
+      const auto second = stackPopTop();
+      const auto first = stackPopTop();
+      stack.push(
+        first / second
+      );
+    } else if (line.at(0) == '+') {
+      stack.push(
+        stackPopTop() + stackPopTop()
+      );
+    } else if (line.at(0) == '-') {
+      const auto second = stackPopTop();
+      const auto first = stackPopTop();
+      stack.push(
+        first - second
+      );
     } else {
       stack.push(std::stoi(line));
     }
