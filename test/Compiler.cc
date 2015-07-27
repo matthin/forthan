@@ -32,3 +32,13 @@ TEST_CASE("Implements bitwise NOT") {
   REQUIRE(compiler.stack.top() == -10);
 }
 
+TEST_CASE("Discards comments") {
+  ft::Compiler compiler(
+    "3 5 *\n"
+    "\\ Example comment\n"
+    "2 +"
+  );
+  REQUIRE(compiler.stack.size() == 1);
+  REQUIRE(compiler.stack.top() == 17);
+}
+

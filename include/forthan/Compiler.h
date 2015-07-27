@@ -10,7 +10,7 @@ namespace ft {
 
 class Compiler {
 public:
-  Compiler(const std::string& instructions);
+  Compiler(std::string instructions);
   std::stack<int> stack;
 
 private:
