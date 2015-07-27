@@ -14,11 +14,15 @@ public:
   std::stack<int> stack;
 
 private:
+  void parseInstructions(std::string instructions);
+
   int stackPopTop() {
     const auto element = stack.top();
     stack.pop();
     return element;
   }
+
+  void addUserWords(std::string* instructions);
 
   std::unordered_map<std::string, std::function<void()>> dictionary = {
     {"+", std::bind(&Compiler::add, this)},

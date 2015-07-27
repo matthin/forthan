@@ -42,3 +42,12 @@ TEST_CASE("Discards comments") {
   REQUIRE(compiler.stack.top() == 17);
 }
 
+TEST_CASE("Implements user defined words") {
+  ft::Compiler compiler(
+    ": EXAMPLE 3 4 * ;\n"
+    " EXAMPLE"
+  );
+  REQUIRE(compiler.stack.size() == 1);
+  REQUIRE(compiler.stack.top() == 12);
+}
+
