@@ -30,6 +30,7 @@ private:
     {"*", std::bind(&Compiler::multiply, this)},
     {"/", std::bind(&Compiler::divide, this)},
     {".", std::bind(&Compiler::print, this)},
+    {"EMIT", std::bind(&Compiler::emit, this)},
     {"CR", std::bind(&Compiler::carriageReturn, this)},
     {"ABS", std::bind(&Compiler::absoluteValue, this)},
 
@@ -37,7 +38,14 @@ private:
     {"AND", std::bind(&Compiler::bitwiseAND, this)},
     {"OR", std::bind(&Compiler::bitwiseOR, this)},
     {"XOR", std::bind(&Compiler::bitwiseXOR, this)},
-    {"NOT", std::bind(&Compiler::bitwiseNOT, this)}
+    {"NOT", std::bind(&Compiler::bitwiseNOT, this)},
+
+    // Comparison Operators
+    {"=", std::bind(&Compiler::equals, this)},
+    {"<", std::bind(&Compiler::lesserThan, this)},
+    {">", std::bind(&Compiler::greaterThan, this)},
+    {"0<", std::bind(&Compiler::lesserThanZero, this)},
+    {"0>", std::bind(&Compiler::greaterThanZero, this)},
   };
 
   void add() {
@@ -66,6 +74,9 @@ private:
   }
   void print() {
     std::cout << stackPopTop();
+  }
+  void emit() {
+    std::cout << std::to_string(stackPopTop());
   }
   void carriageReturn() {
     std::cout << '\r';
@@ -97,6 +108,39 @@ private:
   void bitwiseNOT() {
     stack.push(
       ~stackPopTop()
+    );
+  }
+
+  /*
+   * Comparison Operators
+   */
+  void equals() {
+    stack.push(
+      stackPopTop() == stackPopTop() ? -1 : 0
+    );
+  }
+  void lesserThan() {
+    const auto second = stackPopTop();
+    const auto first = stackPopTop();
+    stack.push(
+      first < second ? -1 : 0
+    );
+  }
+  void greaterThan() {
+    const auto second = stackPopTop();
+    const auto first = stackPopTop();
+    stack.push(
+      first > second ? -1 : 0
+    );
+  }
+  void lesserThanZero() {
+    stack.push(
+      stackPopTop() < 0 ? -1 : 0
+    );
+  }
+  void greaterThanZero() {
+    stack.push(
+      stackPopTop() > 0 ? -1 : 0
     );
   }
 };

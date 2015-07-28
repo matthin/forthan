@@ -51,3 +51,85 @@ TEST_CASE("Implements user defined words") {
   REQUIRE(compiler.stack.top() == 12);
 }
 
+TEST_CASE("Implements comparison operators", "[Compiler]") {
+  SECTION("Equality operator") {
+    SECTION("Pushes -1 on the stack when true") {
+      ft::Compiler compiler(
+        "10 10 ="
+      );
+      REQUIRE(compiler.stack.top() == -1);
+    }
+
+    SECTION("Pushes 0 on the stack when false") {
+      ft::Compiler compiler(
+        "10 9 ="
+      );
+      REQUIRE(compiler.stack.top() == 0);
+    }
+  }
+
+  SECTION("Lesser than operator") {
+    SECTION("Pushes -1 on the stack when true") {
+      ft::Compiler compiler(
+        "40 47 <"
+      );
+      REQUIRE(compiler.stack.top() == -1);
+    }
+
+    SECTION("Pushes 0 on the stack when false") {
+      ft::Compiler compiler(
+        "47 40 <"
+      );
+      REQUIRE(compiler.stack.top() == 0);
+    }
+  }
+
+  SECTION("Greater than operator") {
+    SECTION("Pushes -1 on the stack when true") {
+      ft::Compiler compiler(
+        "35 30 >"
+      );
+      REQUIRE(compiler.stack.top() == -1);
+    }
+
+    SECTION("Pushes 0 on the stack when false") {
+      ft::Compiler compiler(
+        "30 35 >"
+      );
+      REQUIRE(compiler.stack.top() == 0);
+    }
+  }
+
+  SECTION("Lesser than 0 operator") {
+    SECTION("Pushes -1 on the stack when true") {
+      ft::Compiler compiler(
+        "-30 0<"
+      );
+      REQUIRE(compiler.stack.top() == -1);
+    }
+
+    SECTION("Pushes 0 on the stack when false") {
+      ft::Compiler compiler(
+        "30 0<"
+      );
+      REQUIRE(compiler.stack.top() == 0);
+    }
+  }
+
+  SECTION("Greater than 0 operator") {
+    SECTION("Pushes -1 on the stack when true") {
+      ft::Compiler compiler(
+        "45 0>"
+      );
+      REQUIRE(compiler.stack.top() == -1);
+    }
+
+    SECTION("Pushes 0 on the stack when false") {
+      ft::Compiler compiler(
+        "-45 0>"
+      );
+      REQUIRE(compiler.stack.top() == 0);
+    }
+  }
+}
+
