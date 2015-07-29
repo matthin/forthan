@@ -14,10 +14,10 @@ add_library(
 ADD_DEFINITIONS(-std=c++11)
 SET(CMAKE_EXE_LINKER_FLAGS "-pthread")
 
-add_executable(forthanApp src/main.cc)
-target_link_libraries(forthanApp forthan)
-
 add_subdirectory(test)
 enable_testing()
 add_test(NAME forthanTest COMMAND forthanTest)
+
+# Additional optional tools
+add_subdirectory(tools/cli_parser)
 
