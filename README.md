@@ -2,11 +2,12 @@
 Very basic forth implementation in C++
 
 # Support
+##### Words
 * Arithmetic
-  * Addition
-  * Subtraction
-  * Multiplication
-  * Division
+  * +
+  * -
+  * *
+  * /
 * Bitwise
   * AND
   * OR
@@ -18,8 +19,10 @@ Very basic forth implementation in C++
   * <
   * 0>
   * 0<
-* EMIT
-* .
-* CR
-* ABS
+* Output
+  * EMIT
+  * .
+  * CR
+* Other Mathematics
+  * ABS
 
