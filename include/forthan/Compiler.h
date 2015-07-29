@@ -23,6 +23,7 @@ private:
   }
 
   void addUserWords(std::string* instructions);
+  void removeComments(std::string* instructions);
 
   std::unordered_map<std::string, std::function<void()>> dictionary = {
     {"+", std::bind(&Compiler::add, this)},

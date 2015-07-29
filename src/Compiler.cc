@@ -18,6 +18,7 @@ Compiler::Compiler(std::string instructions) {
     position += 2;
   }
 
+  removeComments(&instructions);
   addUserWords(&instructions);
 
   parseInstructions(instructions);
@@ -29,11 +30,6 @@ void Compiler::parseInstructions(std::string instructions) {
   std::string line;
   while(std::getline(stream, line, ' ')) {
     if (line.size() == 0) {
-      continue;
-    }
-    if (line.find('\\') != std::string::npos) {
-      std::string comment;
-      std::getline(stream, comment);
       continue;
     }
     if (line.at(0) == '\n' || line.at(0) == ' ') {
@@ -80,6 +76,26 @@ void Compiler::addUserWords(std::string* instructions) {
     dictionary[wordTitle] = [this, wordInstructions]() {
       parseInstructions(wordInstructions);
     };
+  }
+}
+
+void Compiler::removeComments(std::string* instructions) {
+  for (int i = 0, len = instructions->size(); i < len; ++i) {
+    const auto start = instructions->find('(');
+    if (start == std::string::npos) {
+      break;
+    }
+    const auto end = instructions->find(')', start);
+    instructions->erase(start, end - start + 1);
+  }
+
+  for (int i = 0, len = instructions->size(); i < len; ++i) {
+    const auto start = instructions->find('\\');
+    if (start == std::string::npos) {
+      break;
+    }
+    const auto end = instructions->find('\n', start);
+    instructions->erase(start, end - start + 1);
   }
 }
 
