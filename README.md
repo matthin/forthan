@@ -2,7 +2,7 @@
 Very basic forth implementation in C++
 
 # Support
-##### Words
+## Words
 * Arithmetic
   * +
   * -
