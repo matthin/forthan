@@ -1,8 +1,10 @@
-#include <Compiler.h>
+#include <Parser.h>
 #include <iostream>
+#include <string>
 
 int main(int argc, char* argv[]) {
-  ft::Compiler compiler(argv[1]);
+  std::string instructions(argv[1]);
+  ft::Parser parser(&instructions);
   std::cout << std::endl;
 
   return 0;
