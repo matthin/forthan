@@ -26,3 +26,14 @@ Very basic forth implementation in C++
 * Other Mathematics
   * ABS
 
+# Contributors
+### Setup
+```Shell
+$ git clone --recursive https://github.com/matthin/forthan.git
+$ cd forthan
+$ mkdir build && cd build
+$ cmake ..
+$ make
+$ ./test/forthanTest
+```
+
