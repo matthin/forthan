@@ -32,10 +32,14 @@ private:
   }
 
   std::unordered_map<std::string, std::function<void()>> dictionary = {
+    // Arithmetic Operators
     {"+", std::bind(&Interpreter::add, this)},
     {"-", std::bind(&Interpreter::subtract, this)},
     {"*", std::bind(&Interpreter::multiply, this)},
     {"/", std::bind(&Interpreter::divide, this)},
+    {"*/", std::bind(&Interpreter::multiplyDivide, this)},
+    {"*/MOD", std::bind(&Interpreter::multiplyDivideMod, this)},
+
     {".", std::bind(&Interpreter::print, this)},
     {"EMIT", std::bind(&Interpreter::emit, this)},
     {"CR", std::bind(&Interpreter::carriageReturn, this)},
@@ -55,6 +59,7 @@ private:
     {"0>", std::bind(&Interpreter::greaterThanZero, this)},
   };
 
+  // Arithmetic Operators
   void add() {
     stack.push(
       stackPopTop() + stackPopTop()
@@ -79,6 +84,28 @@ private:
       first / second
     );
   }
+  void multiplyDivide() {
+    const auto third = stackPopTop();
+    // Implicitly casting to long will force the resulting product to also be
+    // a long (4 bytes), which the FORTH standard requires.
+    const long second = stackPopTop();
+    const long first = stackPopTop();
+    stack.push(
+      first * second / third
+    );
+  }
+  void multiplyDivideMod() {
+    const auto third = stackPopTop();
+    const long second = stackPopTop();
+    const long first = stackPopTop();
+    stack.push(
+      first * second % third
+    );
+    stack.push(
+      first * second / third
+    );
+  }
+
   void print() {
     std::cout << stackPopTop();
   }

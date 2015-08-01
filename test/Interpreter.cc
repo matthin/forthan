@@ -114,3 +114,15 @@ TEST_CASE("Implements comparison operators", "[Interpreter]") {
   }
 }
 
+TEST_CASE("Implements multiply-divide (*/)") {
+  ft::Interpreter interpreter("214820 242324 131 */");
+  REQUIRE(interpreter.stack.top() == 397374363);
+}
+
+TEST_CASE("Implements multiply-divide-mod (*/MOD)") {
+  ft::Interpreter interpreter("498571 714240 4692 */MOD");
+  REQUIRE(interpreter.stack.top() == 75895002);
+  interpreter.stack.pop();
+  REQUIRE(interpreter.stack.top() == 1656);
+}
+
