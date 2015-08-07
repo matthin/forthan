@@ -39,7 +39,6 @@ private:
     {"/", std::bind(&Interpreter::divide, this)},
     {"*/", std::bind(&Interpreter::multiplyDivide, this)},
     {"*/MOD", std::bind(&Interpreter::multiplyDivideMod, this)},
-    {"1+", std::bind(&Interpreter::addOne, this)},
 
     {".", std::bind(&Interpreter::print, this)},
     {"EMIT", std::bind(&Interpreter::emit, this)},
@@ -104,11 +103,6 @@ private:
     );
     stack.push(
       first * second / third
-    );
-  }
-  void addOne() {
-    stack.push(
-      stackPopTop() + 1
     );
   }
 

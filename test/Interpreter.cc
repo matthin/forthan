@@ -7,11 +7,6 @@ TEST_CASE("Implements all basic math operators") {
   REQUIRE(interpreter.stack.top() == 13);
 }
 
-TEST_CASE("Implements increment operators") {
-  ft::Interpreter interpreter("98 1+");
-  REQUIRE(interpreter.stack.top() == 99);
-}
-
 TEST_CASE("Implements absolute value") {
   ft::Interpreter interpreter("-47 ABS");
   REQUIRE(interpreter.stack.top() == 47);

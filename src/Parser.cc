@@ -1,10 +1,17 @@
 #include "Compiler.h"
 #include "Interpreter.h"
 #include "Parser.h"
+#include <fstream>
+#include <sstream>
 
 namespace ft {
 
 Parser::Parser(std::string* instructions) {
+  // Add required WORDS.
+  std::stringstream stream;
+  stream << std::ifstream("../words.fs").rdbuf();
+  *instructions += stream.str();
+
   // Add a single space between each newline.
   // Prevents including newline in a word.
   // Without this, *\n wouldn't match with * in the dictionary.
@@ -20,7 +27,6 @@ Parser::Parser(std::string* instructions) {
 
   removeComments(instructions);
 
-  Interpreter interpreter;
   Compiler compiler(instructions, &interpreter);
   interpreter.addWords(compiler.dictionary);
   interpreter.runInstructions(*instructions);
