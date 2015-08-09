@@ -10,6 +10,8 @@ Very basic forth implementation in C++
   * /
   * */
   * */MOD
+  * 1+
+  * 1-
 * Bitwise
   * AND
   * OR
