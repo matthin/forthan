@@ -80,38 +80,6 @@ TEST_CASE("Implements comparison operators", "[Interpreter]") {
       REQUIRE(interpreter.stack.top() == 0);
     }
   }
-
-  SECTION("Lesser than 0 operator") {
-    SECTION("Pushes -1 on the stack when true") {
-      ft::Interpreter interpreter(
-        "-30 0<"
-      );
-      REQUIRE(interpreter.stack.top() == -1);
-    }
-
-    SECTION("Pushes 0 on the stack when false") {
-      ft::Interpreter interpreter(
-        "30 0<"
-      );
-      REQUIRE(interpreter.stack.top() == 0);
-    }
-  }
-
-  SECTION("Greater than 0 operator") {
-    SECTION("Pushes -1 on the stack when true") {
-      ft::Interpreter interpreter(
-        "45 0>"
-      );
-      REQUIRE(interpreter.stack.top() == -1);
-    }
-
-    SECTION("Pushes 0 on the stack when false") {
-      ft::Interpreter interpreter(
-        "-45 0>"
-      );
-      REQUIRE(interpreter.stack.top() == 0);
-    }
-  }
 }
 
 TEST_CASE("Implements multiply-divide (*/)") {

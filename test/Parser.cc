@@ -45,5 +45,35 @@ TEST_CASE("Implements required WORD set", "[Parser]") {
     ft::Parser parser(&instructions);
     REQUIRE(parser.interpreter.stack.top() == 85);
   }
+
+  SECTION("Implements comparison WORD set") {
+    SECTION("Lesser than 0 operator") {
+      SECTION("Pushes -1 on the stack when true") {
+        std::string instructions("-30 0<");
+        ft::Parser parser(&instructions);
+        REQUIRE(parser.interpreter.stack.top() == -1);
+      }
+
+      SECTION("Pushes 0 on the stack when false") {
+        std::string instructions("30 0<");
+        ft::Parser parser(&instructions);
+        REQUIRE(parser.interpreter.stack.top() == 0);
+      }
+    }
+
+    SECTION("Greater than 0 operator") {
+      SECTION("Pushes -1 on the stack when true") {
+        std::string instructions("45 0>");
+        ft::Parser parser(&instructions);
+        REQUIRE(parser.interpreter.stack.top() == -1);
+      }
+
+      SECTION("Pushes 0 on the stack when false") {
+        std::string instructions("-45 0>");
+        ft::Parser parser(&instructions);
+        REQUIRE(parser.interpreter.stack.top() == 0);
+      }
+    }
+  }
 }
 

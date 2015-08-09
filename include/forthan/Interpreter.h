@@ -54,9 +54,7 @@ private:
     // Comparison Operators
     {"=", std::bind(&Interpreter::equals, this)},
     {"<", std::bind(&Interpreter::lesserThan, this)},
-    {">", std::bind(&Interpreter::greaterThan, this)},
-    {"0<", std::bind(&Interpreter::lesserThanZero, this)},
-    {"0>", std::bind(&Interpreter::greaterThanZero, this)},
+    {">", std::bind(&Interpreter::greaterThan, this)}
   };
 
   // Arithmetic Operators
@@ -165,16 +163,6 @@ private:
     const auto first = stackPopTop();
     stack.push(
       first > second ? -1 : 0
-    );
-  }
-  void lesserThanZero() {
-    stack.push(
-      stackPopTop() < 0 ? -1 : 0
-    );
-  }
-  void greaterThanZero() {
-    stack.push(
-      stackPopTop() > 0 ? -1 : 0
     );
   }
 };
