@@ -29,5 +29,21 @@ TEST_CASE("Implements required WORD set", "[Parser]") {
     ft::Parser parser(&instructions);
     REQUIRE(parser.interpreter.stack.top() == 45);
   }
+
+  SECTION("2+") {
+    std::string instructions(
+      "9 2+"
+    );
+    ft::Parser parser(&instructions);
+    REQUIRE(parser.interpreter.stack.top() == 11);
+  }
+
+  SECTION("2-") {
+    std::string instructions(
+      "87 2-"
+    );
+    ft::Parser parser(&instructions);
+    REQUIRE(parser.interpreter.stack.top() == 85);
+  }
 }
 
