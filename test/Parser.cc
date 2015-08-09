@@ -74,6 +74,20 @@ TEST_CASE("Implements required WORD set", "[Parser]") {
         REQUIRE(parser.interpreter.stack.top() == 0);
       }
     }
+
+    SECTION("Equals 0 operator") {
+      SECTION("Pushes -1 on the stack when true") {
+        std::string instructions("0 0=");
+        ft::Parser parser(&instructions);
+        REQUIRE(parser.interpreter.stack.top() == -1);
+      }
+
+      SECTION("Pushes 0 on the stack when false") {
+        std::string instructions("43 0=");
+        ft::Parser parser(&instructions);
+        REQUIRE(parser.interpreter.stack.top() == 0);
+      }
+    }
   }
 }
 
