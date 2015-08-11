@@ -101,3 +101,8 @@ TEST_CASE("Implements CREATE") {
   REQUIRE(interpreter.memory.at(address) == nullptr);
 }
 
+TEST_CASE("Implements DROP") {
+  ft::Interpreter interpreter("1 2 DROP");
+  REQUIRE(interpreter.stack.top() == 1);
+}
+

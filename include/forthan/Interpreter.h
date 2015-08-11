@@ -46,6 +46,7 @@ private:
     {"EMIT", std::bind(&Interpreter::emit, this)},
     {"CR", std::bind(&Interpreter::carriageReturn, this)},
     {"ABS", std::bind(&Interpreter::absoluteValue, this)},
+    {"DROP", std::bind(&Interpreter::drop, this)},
 
     // Bitwise Operators
     {"AND", std::bind(&Interpreter::bitwiseAND, this)},
@@ -119,6 +120,9 @@ private:
     stack.push(
       std::abs(stackPopTop())
     );
+  }
+  void drop() {
+    stack.pop();
   }
 
   /*
