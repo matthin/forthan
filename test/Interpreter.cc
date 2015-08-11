@@ -94,3 +94,10 @@ TEST_CASE("Implements multiply-divide-mod (*/MOD)") {
   REQUIRE(interpreter.stack.top() == 1656);
 }
 
+TEST_CASE("Implements CREATE") {
+  ft::Interpreter interpreter("CREATE example CREATE test test");
+  const auto address = interpreter.stack.top();
+  REQUIRE(address == 1);
+  REQUIRE(interpreter.memory.at(address) == nullptr);
+}
+

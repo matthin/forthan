@@ -5,6 +5,7 @@
 #include <stack>
 #include <string>
 #include <unordered_map>
+#include <vector>
 
 namespace ft {
 
@@ -23,6 +24,7 @@ public:
   }
 
   std::stack<int> stack;
+  std::vector<int*> memory;
 
 private:
   int stackPopTop() {
