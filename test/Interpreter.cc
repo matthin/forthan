@@ -106,3 +106,10 @@ TEST_CASE("Implements DROP") {
   REQUIRE(interpreter.stack.top() == 1);
 }
 
+TEST_CASE("Implements WORD") {
+  ft::Interpreter interpreter("41 WORD c )");
+  const auto startingPosition = interpreter.stack.top();
+  REQUIRE(*(interpreter.memory.at(startingPosition)) == 2);
+  REQUIRE(*(interpreter.memory.at(startingPosition + 1)) == 99);
+}
+

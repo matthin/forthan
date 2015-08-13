@@ -1,11 +1,9 @@
 #include "Interpreter.h"
 
-#include <sstream>
-
 namespace ft {
 
 void Interpreter::runInstructions(const std::string& instructions) {
-  std::istringstream stream(instructions);
+  stream << instructions;
 
   std::string line;
   while(std::getline(stream, line, ' ')) {

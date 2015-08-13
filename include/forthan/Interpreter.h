@@ -3,6 +3,7 @@
 #include <functional>
 #include <iostream>
 #include <stack>
+#include <sstream>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -27,6 +28,8 @@ public:
   std::vector<int*> memory;
 
 private:
+  std::stringstream stream;
+
   int stackPopTop() {
     const auto element = stack.top();
     stack.pop();
@@ -47,6 +50,7 @@ private:
     {"CR", std::bind(&Interpreter::carriageReturn, this)},
     {"ABS", std::bind(&Interpreter::absoluteValue, this)},
     {"DROP", std::bind(&Interpreter::drop, this)},
+    {"WORD", std::bind(&Interpreter::word, this)},
 
     // Bitwise Operators
     {"AND", std::bind(&Interpreter::bitwiseAND, this)},
@@ -123,6 +127,27 @@ private:
   }
   void drop() {
     stack.pop();
+  }
+  void word() {
+    const std::string endChar(
+      1, static_cast<char>(stackPopTop())
+    );
+
+    const auto startingPosition = memory.size();
+    stack.push(startingPosition);
+    memory.push_back(new int(0));
+
+    int numberOfEntries = 0;
+    std::string entry;
+    while (entry != endChar) {
+      std::getline(stream, entry, ' ');
+      memory.push_back(
+        new int(entry[0])
+      );
+      numberOfEntries += 1;
+    }
+
+    memory.at(startingPosition) = new int(numberOfEntries);
   }
 
   /*
