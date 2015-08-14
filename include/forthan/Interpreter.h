@@ -115,7 +115,7 @@ private:
     std::cout << stackPopTop();
   }
   void emit() {
-    std::cout << std::to_string(stackPopTop());
+    std::cout << static_cast<char>(stackPopTop());
   }
   void carriageReturn() {
     std::cout << '\r';
