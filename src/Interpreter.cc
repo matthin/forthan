@@ -11,17 +11,6 @@ void Interpreter::runInstructions(const std::string& instructions) {
       continue;
     }
 
-    if (line == "CREATE") {
-      std::string nextLine;
-      std::getline(stream, nextLine, ' ');
-
-      memory.push_back(nullptr);
-      const auto address = memory.size() - 1;
-      dictionary[nextLine] = [this, address]() { stack.push(address); };
-
-      continue;
-    }
-
     try {
       dictionary.at(line)();
     } catch (const std::out_of_range& error) {

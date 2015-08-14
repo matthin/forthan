@@ -51,6 +51,7 @@ private:
     {"ABS", std::bind(&Interpreter::absoluteValue, this)},
     {"DROP", std::bind(&Interpreter::drop, this)},
     {"WORD", std::bind(&Interpreter::word, this)},
+    {"CREATE", std::bind(&Interpreter::create, this)},
 
     // Bitwise Operators
     {"AND", std::bind(&Interpreter::bitwiseAND, this)},
@@ -148,6 +149,14 @@ private:
     }
 
     memory.at(startingPosition) = new int(numberOfEntries);
+  }
+  void create() {
+    std::string nextLine;
+    std::getline(stream, nextLine, ' ');
+
+    memory.push_back(nullptr);
+    const auto address = memory.size() - 1;
+    dictionary[nextLine] = [this, address]() { stack.push(address); };
   }
 
   /*
