@@ -12,20 +12,9 @@ Parser::Parser(std::string* instructions) {
   stream << std::ifstream("../words.fs").rdbuf();
   *instructions += stream.str();
 
-  // Add a single space between each newline.
-  // Prevents including newline in a word.
-  // Without this, *\n wouldn't match with * in the dictionary.
-  size_t position = 0;
-  for (int i = 0, len = instructions->size(); i < len; ++i) {
-    position = instructions->find('\n', position);
-    if (position == std::string::npos) {
-      break;
-    }
-    instructions->insert(position, " ");
-    position += 2;
-  }
-
   removeComments(instructions);
+
+  cleanupInstructions(instructions);
 
   Compiler compiler(instructions, &interpreter);
   interpreter.addWords(compiler.dictionary);
@@ -49,6 +38,16 @@ void Parser::removeComments(std::string* instructions) const {
     }
     const auto end = instructions->find('\n', start);
     instructions->erase(start, end - start + 1);
+  }
+}
+
+void Parser::replaceAll(
+  std::string* subject, const std::string& search, const std::string& replace
+) {
+  size_t position = 0;
+  while ((position = subject->find(search, position)) != std::string::npos) {
+    subject->replace(position, search.length(), replace);
+    position += replace.length();
   }
 }
 
