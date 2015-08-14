@@ -11,10 +11,11 @@ void Interpreter::runInstructions(const std::string& instructions) {
       continue;
     }
 
-    try {
-      dictionary.at(line)();
-    } catch (const std::out_of_range& error) {
+    auto wordMatch = dictionary.find(line);
+    if (wordMatch == dictionary.end()) {
       stack.push(std::stoi(line));
+    } else {
+      wordMatch->second();
     }
   }
 }
