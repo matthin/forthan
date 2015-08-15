@@ -7,7 +7,7 @@ void Interpreter::runInstructions(const std::string& instructions) {
 
   std::string line;
   while(std::getline(stream, line, ' ')) {
-    if (line.size() == 0 || line.at(0) == '\n' || line.at(0) == ' ') {
+    if (line.size() == 0 || line.at(0) == '\n') {
       continue;
     }
 

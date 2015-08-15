@@ -14,7 +14,6 @@ private:
   void removeComments(std::string* instructions) const;
 
   void cleanupInstructions(std::string* instructions) {
-    replaceAll(instructions, "  ", " ");
     replaceAll(instructions, "\n", " \n ");
   }
 
